@@ -11,10 +11,14 @@ export const validateRequest = async (
 
     return { isValid: true, error: { message: "", status: 200, data: [] } }
   } catch (error) {
-    if (error instanceof yup.ValidationError) {
+    if (error instanceof yup.ValidationError && error?.errors?.length) {
       return {
         isValid: false,
-        error: { message: error?.errors?.join("; "), status: 400, data: [] },
+        error: {
+          message: error.errors[0],
+          status: 400,
+          data: error?.errors,
+        },
       }
     }
 

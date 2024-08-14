@@ -4,3 +4,11 @@ export enum UserRoleEnum {
   EDITOR = "editor",
   VIEWER = "viewer",
 }
+
+export type User = {
+  id?: number;
+  name: string;
+  email: string;
+  password: string;
+  role: UserRoleEnum;
+}

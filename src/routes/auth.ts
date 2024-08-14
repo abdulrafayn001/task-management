@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { Route } from "../utils/types/index"
-import { login } from "../controllers/auth"
+import { login, register } from "../controllers/auth"
 
 const router = Router()
 
@@ -10,6 +10,12 @@ const authRoute: Route[] = [
     route: "/login",
     middlewares: [],
     controller: login,
+  },
+  {
+    method: "post",
+    route: "/register",
+    middlewares: [],
+    controller: register,
   },
 ]
 
