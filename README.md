@@ -24,6 +24,7 @@ This is a RESTful API for User and Task management built with Node.js, Express.j
    ```
    PORT=3000
    NODE_ENV=development
+   JWT_SECRET=jwt_secret
    ```
    You can change the PORT number if needed.
    Set NODE_ENV to 'production' for production environments.

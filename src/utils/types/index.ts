@@ -20,6 +20,7 @@ export type Route = {
 export type Secret = {
   port: string;
   environment: string;
+  jwtSecret: string;
 };
 
 export type RequestObject = Request & {

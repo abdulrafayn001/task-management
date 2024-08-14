@@ -13,6 +13,7 @@ const validateEnv = (value: string | undefined, name: string): string => {
 const secrets: Secret = {
   port: validateEnv(process.env.PORT, "PORT"),
   environment: validateEnv(process.env.NODE_ENV, "NODE_ENV"),
+  jwtSecret: validateEnv(process.env.JWT_SECRET, "JWT_SECRET"),
 }
 
 export default secrets
