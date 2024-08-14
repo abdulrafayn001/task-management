@@ -9,8 +9,8 @@ export const hashPassword = (password: string): Promise<string> => {
   return bcrypt.hash(password, SALT_ROUNDS)
 }
 
-export const generateToken = (userId: number, role: UserRoleEnum): string => {
-  return jwt.sign({ userId, role }, secrets.jwtSecret as string, {
+export const generateToken = (userId: number, role: UserRoleEnum, email: string): string => {
+  return jwt.sign({ userId, role, email }, secrets.jwtSecret as string, {
     expiresIn: "1d",
   })
 }

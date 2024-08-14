@@ -9,6 +9,7 @@ export const isAuthorized = (roles: UserRoleEnum[]) => {
     next: NextFunction
   ) => {
     const currentUser = req?.currentUser
+
     if (!currentUser) {
       next(
         new HttpException(

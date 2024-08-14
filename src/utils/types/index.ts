@@ -27,13 +27,19 @@ export type RequestObject = Request & {
   currentUser?: {
     role: UserRoleEnum;
     email: string;
-    first_name: string;
-    last_name: string;
+    name: string;
+    id: number;
   };
 };
 
 export type ValidationRules = {
   [key: string]: yup.Schema<unknown>;
+};
+
+export type DecodedToken = {
+  userId: number;
+  email: string;
+  role: UserRoleEnum;
 };
 
 export * from "./user.types"

@@ -27,7 +27,7 @@ export const loginHandler = async (
       return next(new HttpException(401, "Invalid credentials", "error"))
     }
 
-    const token = generateToken(user.id!, user.role)
+    const token = generateToken(user.id!, user.role, user.email)
 
     return res.json({
       user: {
@@ -63,6 +63,7 @@ export const signUpHandler = async (
       password: hashedPassword,
       role: UserRoleEnum.VIEWER,
     }
+    
     const userId = await createUser(newUser)
 
     return res
