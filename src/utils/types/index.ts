@@ -43,3 +43,4 @@ export type DecodedToken = {
 };
 
 export * from "./user.types"
+export * from "./task.types"
