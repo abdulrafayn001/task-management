@@ -1,5 +1,10 @@
 import sqlite3 from "sqlite3"
 import { Database, open } from "sqlite"
+import { UserRoleEnum } from "../utils/types"
+import { createUser } from "../../models"
+import secrets from "../../secrets"
+import { hashPassword } from "../utils/helperFunctions"
+
 
 let db: Database
 
@@ -12,6 +17,7 @@ export async function initializeDatabase(): Promise<void> {
 
     console.log("Database connected")
     await createTables()
+    await seedSuperUser()
   } catch (err) {
     console.error("Error opening database", err)
     throw err
@@ -40,6 +46,32 @@ async function createTables(): Promise<void> {
     )
   `)
 }
+
+async function seedSuperUser(): Promise<void> {
+  const superUserEmail = secrets.superUserEmail
+  const superUserPassword = secrets.superUserPassword
+
+  const existingSuperUser = await db.get(
+    "SELECT * FROM users WHERE email = ?",
+    [superUserEmail]
+  )
+
+  if (!existingSuperUser) {
+    const hashedPassword = await hashPassword(superUserPassword)
+
+    await createUser({
+      name: "Super Admin",
+      email: superUserEmail,
+      password: hashedPassword,
+      role: UserRoleEnum.SUPER_ADMIN,
+    })
+
+    console.log("Super user seeded successfully")
+  } else {
+    console.log("Super user already exists")
+  }
+}
+
 export function getDatabase(): Database {
   return db
 }

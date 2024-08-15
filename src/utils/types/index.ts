@@ -21,6 +21,8 @@ export type Secret = {
   port: string;
   environment: string;
   jwtSecret: string;
+  superUserEmail: string;
+  superUserPassword: string;
 };
 
 export type RequestObject = Request & {
